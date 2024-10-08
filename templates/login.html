@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<section class="contenedor">
+    <h1>Inicio de sesión</h1>
+    
+    <form action="/" method="post">
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" value="{{usuario}}">
+
+        <label for="passwd">Contraseña:</label>
+        <input type="password" id="passwd" name="passwd" value="{{passwd}}">
+
+        <button type="submit" value="Entrar">Entrar</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Búsqueda de salarios{% endblock %}
+{% block content %}
+<section class="contenedor">
+    <h1>Empleados</h1>
+        <p>Escribe un rango de sueldos para ver los empleados que están en esa horquilla</p>
+    
+    <form action="/empleados" method="post">
+        <label for="minimo">Mínimo:</label>
+        <input type="text" id="minimo" name="minimo" value="{{minimo}}">
+        <label for="maximo">Máximo:</label>
+        <input type="text" id="maximo" name="maximo" value="{{maximo}}">
+        <button type="submit" value="Enviar">Ver</button>
+    </form>
+ </section>
+{% endblock %}

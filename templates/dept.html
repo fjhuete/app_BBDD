@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Departamentos{% endblock %}
+{% block content %}
+<section class="contenedor">
+    <h1>Departamentos</h1>
+        <p>Elige un departamento de la lista para ver sus empleados</p>
+    
+    <form action="/departamento" method="post">
+        <label for="deptno">Departamento:</label>
+        <select id="deptno" name="deptno">
+            <option value="0">Todos</option>
+        {% for departamento in departamentos %} 
+            <option value="{{departamento._id}}">{{departamento.dname}}</option>
+        {% endfor %}
+        </select>
+        
+        <button type="submit" value="Ver">Ver</button>
+    </form>
+ </section>
+{% endblock %}
