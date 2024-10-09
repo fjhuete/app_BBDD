@@ -14,7 +14,7 @@ def login():
         usuario = request.form.get("usuario")
         passwd = request.form.get("passwd")
 
-        uri = f"mongodb://{usuario}:{passwd}@{host}:{port}/?directConnection=true&authSource=scott&appName=mongosh+2.2.4"
+        uri = f"mongodb://{usuario}:{passwd}@{host}:{port}/scott?directConnection=true&authSource=scott&appName=mongosh+2.2.4"
     
         cliente = MongoClient(uri)
 
