@@ -4,36 +4,34 @@ from pymongo.mongo_client import MongoClient
 host = "192.168.122.166"
 port = "27017"
 
-uri = f"mongodb://scott:tiger@{host}:{port}/?directConnection=true&authSource=scott&appName=mongosh+2.2.4"
+def conexion(usuario,passwd):
+    uri = f"mongodb://{usuario}:{passwd}@{host}:{port}/?directConnection=true&authSource=scott&appName=mongosh+2.2.4"
+    
+    cliente = MongoClient(uri)
+    
+    try:
+        cliente.admin.command('ping')
+        return cliente
+    except Exception as e:
+        print(e)
+        return False
 
-
-cliente = MongoClient(uri)
+""" cliente = conexion()
 db = cliente.scott
 emp = db.emp
 dept = db.dept
-usuarios = db.usuarios
+usuarios = db.usuarios """
 
-def probarconexion():
+""" def probarconexion(usuario,passwd):
     try:
+        cliente = conexion(usuario,passwd)
         cliente.admin.command('ping')
         print("Conexión exitosa a la base de datos.")
     except Exception as e:
-        print(e)
+        print(e) """
 
 def cerrarcliente():
     cliente.close()
-
-def login(user,passwd):
-    lista = []
-    login = False
-    cursor = usuarios.find({"usuario":user})
-    for documento in cursor:
-        lista.append(documento)
-    print(lista)
-    for usuario in lista:
-        if usuario["passwd"] == passwd:
-            login = True
-    return login
 
 def mostrardeptartamentos():
     cursor = dept.find({})
