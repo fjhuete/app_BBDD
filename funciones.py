@@ -6,9 +6,11 @@ port = "27017"
 
 def conexion(usuario,passwd):
     uri = f"mongodb://{usuario}:{passwd}@{host}:{port}/?directConnection=true&authSource=scott&appName=mongosh+2.2.4"
-    
     cliente = MongoClient(uri)
-    
+    return cliente
+
+def login(usuario,passwd):
+    cliente = conexion(usuario,passwd)
     try:
         cliente.admin.command('ping')
         return cliente
@@ -16,35 +18,30 @@ def conexion(usuario,passwd):
         print(e)
         return False
 
-""" cliente = conexion()
-db = cliente.scott
-emp = db.emp
-dept = db.dept
-usuarios = db.usuarios """
-
-""" def probarconexion(usuario,passwd):
-    try:
-        cliente = conexion(usuario,passwd)
-        cliente.admin.command('ping')
-        print("Conexión exitosa a la base de datos.")
-    except Exception as e:
-        print(e) """
-
-def cerrarcliente():
-    cliente.close()
-
-def mostrardeptartamentos():
+def mostrardeptartamentos(usuario,passwd):
+    cliente = conexion(usuario,passwd)
+    db = cliente.scott
+    dept = db.dept
     cursor = dept.find({})
     return cursor
 
-def mostrarempleados():
-    cursor = emp.find({})
-    return cursor
+def mostrarempleados(usuario,passwd):
+    empleados = []
+    cliente = conexion(usuario,passwd)
+    db = cliente.scott
+    emp = db.emp
+    cursor_emp = emp.find({})
+    for documento in cursor_emp:
+        empleados.append(documento)
+    return empleados
 
-def buscar_empleados(deptno):
+def buscar_empleados(deptno,usuario,passwd):
     lista = []
+    cliente = conexion(usuario,passwd)
+    db = cliente.scott
+    emp = db.emp
     if int(deptno) == 0:
-        cursor = mostrarempleados()
+        cursor = mostrarempleados(usuario,passwd)
         for documento in cursor:
             lista.append(documento)
     else:
@@ -53,8 +50,11 @@ def buscar_empleados(deptno):
             lista.append(documento)
     return lista
 
-def rango_salario(min,max):
+def rango_salario(min,max,usuario,passwd):
     lista = []
+    cliente = conexion(usuario,passwd)
+    db = cliente.scott
+    emp = db.emp
     consulta = {"$match": {"sal": {"$gt": int(min), "$lt": int(max)}}}
     orden = {"$sort": {"sal": -1}}
     agregacion = [consulta,orden]

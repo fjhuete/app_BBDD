@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Empleados{% endblock %}
+{% block content %}
+<section class="contenedor">
+    <h1>Empleados</h1>
+    <table>
+        <thead>
+            <tr>
+                <th><h2>Código</h2></th>
+                <th><h2>Nombre</h2></th>
+                <th><h2>Empleo</h2></th>
+                <th><h2>Jefe</h2></th>
+                <th><h2>Contratación</h2></th>
+                <th><h2>Salario</h2></th>
+                <th><h2>Comisión</h2></th>
+                <th><h2>Departamento</h2></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for emp in emps %}
+            <tr>
+                <td>{{emp._id}}</td>
+                <td>{{emp.ename}}</td>
+                <td>{{emp.job}}</td>
+                <td>{{emp.mgr}}</td>
+                <td>{{emp.hiredate}}</td>
+                <td>{{emp.sal}}</td>
+                <td>{{emp.comm}}</td>
+                <td>{{emp.deptno}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

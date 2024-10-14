@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Departamentos{% endblock %}
+{% block content %}
+<section class="contenedor">
+    <h1>Departamentos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th><h2>Código</h2></th>
+                <th><h2>Nombre</h2></th>
+                <th><h2>Ubicación</h2></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dept in depts %}
+            <tr>
+                <td>{{dept._id}}</td>
+                <td>{{dept.dname}}</td>
+                <td>{{dept.loc}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
